@@ -1,0 +1,2 @@
+Use docker build -t <user>/<name>:<tag>
+You can then use docker commit -m <message> -a "author" <image id> <new user>/<image name>:<tag> to update it subsequently
