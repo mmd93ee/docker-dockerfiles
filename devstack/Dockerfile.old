@@ -1,0 +1,58 @@
+#######################################################
+#          DevStack base server build                 #
+#                                                     #
+#     Version: 1.0                                    #
+#     Author: Matthew Dutton (dutton.matt@gmail.com)  #
+#                                                     #
+#                                                     #
+#######################################################
+
+FROM ubuntu:14.04
+MAINTAINER Matthew Dutton <dutton.matt@gmail.com>
+
+# Install base packages required by devstack installation
+RUN sudo apt-get update
+RUN sudo apt-get install git -y || sudo yum install -y git
+RUN git clone https://git.openstack.org/openstack-dev/devstack
+
+# Create devstack user and change owner of devstack base directory, ensure we are in the base directory
+RUN cp /devstack/samples/local.conf /devstack/
+RUN /devstack/tools/create-stack-user.sh
+
+# Reinstall pip
+RUN sudo apt-get install python-pip -y 
+RUN sudo pip install --upgrade pip
+RUN sudo pip install --upgrade virtualenv
+
+# Change folder permissions
+RUN chown -R stack:stack /devstack
+#RUN mkdir /root/.cache
+#RUN chmod 0777 /root/.cache
+
+# Run devstack configuration and installation
+RUN sudo -u stack /devstack/stack.sh
+
+
+
+
+
+
+
+
+# Copy stuff
+# COPY file target folder
+
+# Map ports
+# EXPOSE port port port
+
+# To run by default
+#CMD ["cmd", "var"]
+
+
+
+
+
+
+
+
+

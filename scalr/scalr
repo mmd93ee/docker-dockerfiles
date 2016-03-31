@@ -128,5 +128,4 @@ case "$1" in
     ;;
 esac
 
-echo "Dropping to shell"
-/bin/bash
+# Launch scalr daemon
